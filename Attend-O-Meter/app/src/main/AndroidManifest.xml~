@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.prerit.attend_o_meter" >
+
+    <uses-sdk android:minSdkVersion="11" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <android:uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <android:uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
+
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
+    <!--
+      IMPORTANT: Change "com.parse.tutorials.pushnotifications.permission.C2D_MESSAGE" in the lines below
+      to match your app's package name + ".permission.C2D_MESSAGE".
+    -->
+    <permission android:protectionLevel="signature"
+        android:name="com.example.prerit.attend_o_meter.permission.C2D_MESSAGE" />
+    <uses-permission android:name="com.example.prerit.attend_o_meter.permission.C2D_MESSAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/Theme.AppCompat.Light.DarkActionBar" >
+        <activity
+            android:name=".Login"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ForgotPassword"
+            android:label="@string/title_activity_forgot_password"
+            android:parentActivityName=".Login" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.prerit.attend_o_meter.Login" />
+        </activity>
+        <activity
+            android:name=".Registration"
+            android:label="@string/title_activity_registration" >
+            android:parentActivityName=".Login" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.prerit.attend_o_meter.Login" />
+        </activity>
+        <activity
+            android:name=".StudentHome"
+            android:label="@string/title_activity_student_home"
+            android:parentActivityName=".Login" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.prerit.attend_o_meter.Login" />
+        </activity>
+        <activity
+            android:name=".ProfessorHome"
+            android:label="@string/title_activity_professor_home" >
+        </activity>
+        <!--
+            android:parentActivityName=".Login" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.prerit.attend_o_meter.Login" />
+        -->
+
+        <activity
+            android:name=".AddCourse"
+            android:label="@string/title_activity_add_course" >
+        </activity>
+        <activity
+            android:name=".AddCourseStudent"
+            android:label="@string/title_activity_add_course_student" >
+        </activity>
+        <activity
+            android:name=".Attendance"
+            android:label="@string/title_activity_attendance" >
+        </activity>
+        <activity
+            android:name=".ProfessorCourses"
+            android:label="@string/title_activity_professor_courses"
+            android:parentActivityName=".ProfessorHome" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.prerit.attend_o_meter.ProfessorHome" />
+        </activity>
+        <activity
+            android:name=".CourseProfessor"
+            android:label="@string/title_activity_course_professor"
+            android:parentActivityName=".ProfessorCourses" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.prerit.attend_o_meter.ProfessorCourses" />
+        </activity>
+        <activity
+            android:name=".StudentCourses"
+            android:label="@string/title_activity_student_courses"
+            android:parentActivityName=".StudentHome" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.prerit.attend_o_meter.StudentHome" />
+        </activity>
+        <activity
+            android:name=".CourseStudent"
+            android:label="@string/title_activity_course_student"
+            android:parentActivityName=".StudentCourses" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.prerit.attend_o_meter.StudentCourses" />
+        </activity>
+        <activity
+            android:name=".AssignMarks"
+            android:label="@string/title_activity_assign_marks" >
+        </activity>
+        <activity
+            android:name=".StudentsInCourse"
+            android:label="@string/title_activity_students_in_course"
+            android:parentActivityName=".CourseProfessor" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.prerit.attend_o_meter.CourseProfessor" />
+        </activity>
+
+	<service android:name="com.parse.PushService" />
+
+
+
+        <receiver android:name="com.parse.ParseBroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.USER_PRESENT" />
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name="com.example.prerit.attend_o_meter.Receiver" android:exported="false">
+            <intent-filter>
+                <action android:name="com.parse.push.intent.RECEIVE" />
+                <action android:name="com.parse.push.intent.DELETE" />
+                <action android:name="com.parse.push.intent.OPEN" />
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name="com.parse.GcmBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+
+                <!--
+                  IMPORTANT: Change "com.parse.tutorials.pushnotifications" to match your app's package name.
+                -->
+                <category android:name="com.example.prerit.attend_o_meter" />
+            </intent-filter>
+        </receiver>
+
+
+
+
+        <meta-data android:name="com.parse.push.notification_icon"
+            android:resource="@drawable/ic_launcher"/>
+
+	
+    </application>
+
+</manifest>

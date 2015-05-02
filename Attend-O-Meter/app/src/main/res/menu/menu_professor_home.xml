@@ -1,0 +1,23 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.prerit.attend_o_meter.ProfessorHome">
+
+
+    <item android:id="@+id/action_add_course"
+        android:icon="@drawable/ic_action_new_light"
+        android:title="@string/add_course"
+        app:showAsAction="ifRoom" />
+
+    <item android:id="@+id/myCourses"
+        android:title="@string/myCourses"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/logout"
+        android:title="@string/Logout"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
+
+</menu>

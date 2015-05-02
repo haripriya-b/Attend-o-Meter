@@ -1,0 +1,29 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:paddingBottom="10dip"
+    android:background="@color/light_blue"
+    android:paddingLeft="10dip">
+
+
+
+        <TextView
+            android:id="@+id/tv_courseId"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/activity_horizontal_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:textSize="15dp"
+            android:textColor="#C20000" />
+
+        <TextView
+            android:id="@+id/attendance_pc"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:textColor="@color/black" />
+
+
+</LinearLayout>

@@ -1,0 +1,61 @@
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_add_course"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom">
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/semester_selection"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".ScheduleDialogFragment">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin">
+        <EditText
+            android:id="@+id/ed_hr"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:hint="Hrs"
+            android:maxLength="2"/>
+
+
+        <EditText
+            android:id="@+id/ed_mins"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="Mins"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:layout_weight="1"
+            android:maxLength="2"/>
+
+
+        <EditText
+            android:id="@+id/ed_AMPM"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textCapCharacters"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:hint="AM/PM"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+</LinearLayout>
+    </ScrollView><!-- From: file:/home/prerit/Desktop/Attend-O-Meter/app/src/main/res/layout/fragment_schedule_dialog.xml -->

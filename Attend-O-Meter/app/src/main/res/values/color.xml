@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="light_blue" type="color">#00BCD4</item>
+    <item name="cyan" type="color">#0097A7</item>
+    <item name="white" type="color">#FFFFFF</item>
+    <item name="amber" type="color">#FFC107</item>
+    <item name="blue_grey" type="color">#455A64</item>
+    <item name="blue2" type="color">#B2EBF2</item>
+    <item name="dark_grey" type="color">#727272</item>
+    <item name="black" type="color">#000000</item>
+</resources>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/home/prerit/Desktop/Attend-O-Meter/app/libs/bolts-android-1.1.4-javadoc.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="f5dd6492c539679411fa30818320b737c410158f">
+        <dex dex="/home/prerit/Desktop/Attend-O-Meter/app/build/intermediates/pre-dexed/debug/bolts-android-1.1.4-javadoc-ae432d835808cc2145fb690258a4b6be8137f45a.jar" />
+    </item>
+    <item
+        jar="/home/prerit/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/22.0.0/support-annotations-22.0.0.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
+        <dex dex="/home/prerit/Desktop/Attend-O-Meter/app/build/intermediates/pre-dexed/debug/support-annotations-22.0.0-44d870bd9b8297fbcca29c7be82a4df9b70a6f0d.jar" />
+    </item>
+    <item
+        jar="/home/prerit/Desktop/Attend-O-Meter/app/libs/mail.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="428e267abff0d10802ccde86b915da2c20471160">
+        <dex dex="/home/prerit/Desktop/Attend-O-Meter/app/build/intermediates/pre-dexed/debug/mail-c0daf3b3a8de402376597399abe22ced9f3fe608.jar" />
+    </item>
+    <item
+        jar="/home/prerit/Desktop/Attend-O-Meter/app/libs/additionnal.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="bd9e8dc422bb8c8405359947fe9f4282b49f57f4">
+        <dex dex="/home/prerit/Desktop/Attend-O-Meter/app/build/intermediates/pre-dexed/debug/additionnal-afc46382e650831fa7402e07da0f8e8dd803ab4f.jar" />
+    </item>
+    <item
+        jar="/home/prerit/Desktop/Attend-O-Meter/app/libs/activation.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="d1257cbff6faa44c1f325ae0d9413522d4644383">
+        <dex dex="/home/prerit/Desktop/Attend-O-Meter/app/build/intermediates/pre-dexed/debug/activation-c017c28e93ccec8f1aebcf192d5666c6e89cdd02.jar" />
+    </item>
+    <item
+        jar="/home/prerit/Desktop/Attend-O-Meter/app/libs/ParseCrashReporting-1.8.3.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="6abf1314a88755b8fa034b2ae99956fc02170ed1">
+        <dex dex="/home/prerit/Desktop/Attend-O-Meter/app/build/intermediates/pre-dexed/debug/ParseCrashReporting-1.8.3-29560848f9b77bd7fac6a660ef8d84bfef50e38b.jar" />
+    </item>
+    <item
+        jar="/home/prerit/Desktop/Attend-O-Meter/app/libs/Parse-1.8.3.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="56dfc827c23c1f0be64eff2ef556633ea95b16ad">
+        <dex dex="/home/prerit/Desktop/Attend-O-Meter/app/build/intermediates/pre-dexed/debug/Parse-1.8.3-abf3b6e9df4609fbcc00bc500c3bca12ac003201.jar" />
+    </item>
+    <item
+        jar="/home/prerit/Desktop/Attend-O-Meter/app/libs/bolts-android-1.1.4.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="129874135e6081269ace2312092031558865de12">
+        <dex dex="/home/prerit/Desktop/Attend-O-Meter/app/build/intermediates/pre-dexed/debug/bolts-android-1.1.4-339c0177698cedc451689e40e2b0316eb1d7d50d.jar" />
+    </item>
+    <item
+        jar="/home/prerit/Desktop/Attend-O-Meter/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
+        <dex dex="/home/prerit/Desktop/Attend-O-Meter/app/build/intermediates/pre-dexed/debug/classes-2eca7ea3ade3c9080a93e9815ecc63d32f78b9e0.jar" />
+    </item>
+    <item
+        jar="/home/prerit/Desktop/Attend-O-Meter/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/libs/internal_impl-22.0.0.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="b5b92f469d515a13d778900f6d50c03d12f35504">
+        <dex dex="/home/prerit/Desktop/Attend-O-Meter/app/build/intermediates/pre-dexed/debug/internal_impl-22.0.0-a5fe3cc9ed491f34f75dc06e9c75d33267ca945f.jar" />
+    </item>
+    <item
+        jar="/home/prerit/Desktop/Attend-O-Meter/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="d84409890828e07d344a3b9b1da545dba9897b51">
+        <dex dex="/home/prerit/Desktop/Attend-O-Meter/app/build/intermediates/pre-dexed/debug/classes-d2d0bd20d14e8626559c70fd5f1484c2f38ef723.jar" />
+    </item>
+
+</items>

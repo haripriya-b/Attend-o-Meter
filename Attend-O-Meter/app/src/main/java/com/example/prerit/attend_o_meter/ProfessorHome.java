@@ -1,0 +1,313 @@
+package com.example.prerit.attend_o_meter;
+
+import android.content.Intent;
+import android.support.v4.app.DialogFragment;
+import android.support.v7.app.ActionBarActivity;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.Toast;
+
+import com.parse.Parse;
+import com.parse.ParseInstallation;
+import com.parse.ParseObject;
+import com.parse.ParsePush;
+import com.parse.ParseQuery;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
+
+public class ProfessorHome extends ActionBarActivity implements CourseDialogFragment.CourseDialogListener{
+
+    String fname, lname,id, courseObjID;
+    String semester = "";
+    CoursePOJO selectedCourse;
+    public final static String EXTRA_MESSAGE = "com.example.prerit.attend_o_meter.MESSAGE";
+
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_professor_home);
+
+        Parse.initialize(this, "c1Tcja7oupsKmxy7qbkcyJWPHrpLvUI0vYXlvbtr", "hHSIS28AEgqL4zo2EiuMtjXv0wS3CVgxDlaDVRBD");
+	    ParseInstallation.getCurrentInstallation().saveInBackground();
+        ParseObject.registerSubclass(Semester.class);
+        ParseObject.registerSubclass(CourseSchedule.class);
+        ParseObject.registerSubclass(Course.class);
+        ParseObject.registerSubclass(UserDetails.class);
+
+        Bundle extras = getIntent().getExtras();
+        id = extras.getString("id");
+
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("UserDetails");
+        query.whereEqualTo("emailId",id);
+        Log.i("id", id);
+        query.selectKeys(Arrays.asList("firstName", "lastName"));
+        try {
+            List<ParseObject> result = query.find();
+            fname = result.get(0).getString("firstName");
+            lname = result.get(0).getString("lastName");
+
+        } catch (com.parse.ParseException e) {
+            e.printStackTrace();
+        }
+
+
+        Toast.makeText(this, "Welcome " + fname+" "+lname,Toast.LENGTH_LONG).show();
+
+        ArrayList<CoursePOJO> searchResults = new ArrayList<CoursePOJO>();
+        try {
+            searchResults = GetSearchResults();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        final ListView lv = (ListView) findViewById(R.id.listview1);
+        lv.setAdapter(new CustomBaseAdapter(this, searchResults));
+
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> a, View v, int position, long id) {
+                Object o = lv.getItemAtPosition(position);
+                selectedCourse = (CoursePOJO)o;
+
+                showCourseDialog();
+                //Toast.makeText(ProfessorHome.this, "You have chosen: " + " " + fullObject.getCourseID(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+    }
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(getApplicationContext(), Login.class));
+        finish();
+
+        // android.os.Process.killProcess(android.os.Process.myPid());
+    }
+
+    private ArrayList<CoursePOJO> GetSearchResults() throws ParseException {
+
+        ArrayList<CoursePOJO> results = new ArrayList<CoursePOJO>();
+
+        SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat dateFormat2 = new SimpleDateFormat("EEEE");
+        Date currentDate;
+        Calendar calendar = Calendar.getInstance();
+        String dt = dateFormat1.format(calendar.getTime());
+        currentDate = dateFormat1.parse(dt);
+        String day = dateFormat2.format(calendar.getTime());
+        //Log.i("date:" , currentDate.toString());
+
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Semester");
+        try {
+            List<ParseObject> result = query.find();
+            Date sdate, edate;
+            for(int i=0;i<result.size();i++) {
+                sdate = result.get(i).getDate("startDate");
+                edate = result.get(i).getDate("endDate");
+                if(currentDate.after(sdate) && currentDate.before(edate)) {
+                    semester = result.get(i).getString("semesterName");
+                    break;
+                }
+            }
+            //Log.i("semester:", semester);
+
+        } catch (com.parse.ParseException e) {
+            e.printStackTrace();
+        }
+
+        if(semester.equals("")) {
+            CoursePOJO course = new CoursePOJO();
+            course.setCourseName("No ongoing Semster");
+            results.add(course);
+        }else {
+
+            CoursePOJO coursePOJO;
+
+            ParseQuery<ParseObject> query_courses = ParseQuery.getQuery("Course");
+            query_courses.whereEqualTo("semester", semester);
+            query_courses.whereEqualTo("professor", id);
+
+            try {
+                List<ParseObject> result_courses = query_courses.find();
+                String id, name, time="";
+                if (result_courses.size() == 0) {
+                    CoursePOJO course = new CoursePOJO();
+                    course.setCourseName("No Courses added for this Semester!");
+                    results.add(course);
+                }else {
+                    int ct = 0;
+                    for(int i=0;i<result_courses.size();i++) {
+
+                        id = result_courses.get(i).getString("courseId");
+                        name = result_courses.get(i).getString("courseName");
+                        courseObjID = result_courses.get(i).getObjectId().toString();
+                        //Log.i("rsoid", result_courses.get(i).getObjectId());
+
+
+                        ParseQuery<ParseObject> query_time = ParseQuery.getQuery("CourseSchedule");
+                        query_time.whereEqualTo("courseId", id);
+                        query_time.whereEqualTo("dayOfWeek", day);
+
+                        //Log.i("day:", day);
+                        //Log.i("id:", id);
+                        try {
+                            List<ParseObject> result_schd = query_time.find();
+
+                            if (result_schd.size() == 0) {
+                                /*CoursePOJO course = new CoursePOJO();
+                                course.setCourseName("No Classes Today!");
+                                results.add(course);*/
+                                break;
+                            } else {
+                                ct+=1;
+                                //Log.i("size:", Integer.toString(result_schd.size()));
+                                time = result_schd.get(0).getNumber("timeHrs").toString() + ":" + result_schd.get(0).getNumber("timeMins").toString()
+                                        + " " + result_schd.get(0).getString("AM_PM");
+                            }
+                        } catch (com.parse.ParseException e) {
+                            e.printStackTrace();
+                        }
+
+                        //Log.i("course:", name);
+                        //Log.i("time:", time);
+                        if (!time.equals("")) {
+                            Date d1;
+                            SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm a");
+                            d1 = dateFormat.parse(time);
+
+                            coursePOJO = new CoursePOJO();
+                            coursePOJO.setCourseID(id);
+                            coursePOJO.setCourseName(name);
+                            coursePOJO.setTime(d1);
+                            coursePOJO.setCourse_objectID(courseObjID);
+                            results.add(coursePOJO);
+                        }
+                    }
+
+                    if (ct == 0) {
+                        CoursePOJO course = new CoursePOJO();
+                        course.setCourseName("No Classes Today!");
+                        results.add(course);
+                    }
+                }
+
+
+            } catch (com.parse.ParseException e) {
+                e.printStackTrace();
+            }
+
+        }
+        return results;
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_professor_home, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        //Log.d("item id: ","" + item.getItemId());
+        switch (item.getItemId()) {
+            case R.id.logout:
+                finish();
+                Intent intentLogin = new Intent(ProfessorHome.this,Login.class);
+                startActivity(intentLogin);
+
+                break;
+
+            case R.id.action_add_course:
+                goToAdd();
+                break;
+            case R.id.myCourses:
+                viewMyCourses();
+
+
+        }
+
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void viewMyCourses() {
+        Intent intent1 = new Intent(this,ProfessorCourses.class);
+        intent1.putExtra(EXTRA_MESSAGE, this.id);
+        startActivity(intent1);
+
+
+    }
+
+    public void showCourseDialog() {
+        // Create an instance of the dialog fragment and show it
+        DialogFragment dialog = new CourseDialogFragment();
+        dialog.show(getSupportFragmentManager(), "CourseDialogFragment");
+    }
+
+    public void goToAdd() {
+        Bundle extras = new Bundle();
+        extras.putString("fname", fname);
+        extras.putString("lname",lname);
+        extras.putString("id",id);
+        Intent intentAdd = new Intent(this, AddCourse.class);
+        intentAdd.putExtras(extras);
+        startActivity(intentAdd);
+    }
+
+
+
+    @Override
+    public void takeAttendance() {
+
+        Bundle extras = new Bundle();
+        extras.putString("courseID",selectedCourse.getCourseID());
+        extras.putString("courseObjID",selectedCourse.getCourse_objectID());
+        extras.putString("profID", id);
+       // Log.i("ID", selectedCourse.getCourse_objectID());
+        Intent intentAttendance = new Intent(ProfessorHome.this, Attendance.class);
+        intentAttendance.putExtras(extras);
+        startActivity(intentAttendance);
+        //Toast.makeText(this, "Take Attendance",Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void viewCourse() {
+        Intent intent = new Intent(this,CourseProfessor.class);
+        intent.putExtra(EXTRA_MESSAGE, selectedCourse.getCourseID());
+        startActivity(intent);
+
+       // Toast.makeText(this, "View Course",Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void cancelClass() {
+
+	ParsePush push = new ParsePush();
+        push.setChannel(selectedCourse.getCourseID());
+        String message = "Today\'s " + selectedCourse.getCourseName() + "class has been canceled!";
+        push.setMessage(message);
+        push.sendInBackground();
+
+        Toast.makeText(this, "Class Cancelled!",Toast.LENGTH_LONG).show();
+    }
+}

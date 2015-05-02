@@ -1,0 +1,20 @@
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:background="@color/blue2"
+        android:isScrollContainer="true"
+        tools:context="com.example.prerit.attend_o_meter.ProfessorHome">
+
+        <ListView android:id="@+id/listview1"
+            android:layout_width="fill_parent"
+            android:background="@color/light_blue"
+            android:divider="@color/white"
+            android:dividerHeight="1dp"
+            android:layout_height="fill_parent" />
+
+    </LinearLayout>
